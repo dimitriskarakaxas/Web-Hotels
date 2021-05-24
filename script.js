@@ -56,3 +56,16 @@ closeRegisterFormBtn.addEventListener("click", closeRegisterFormHandler);
 createAccountBtn.addEventListener("click", createAccountBtnHandler);
 loginAccountBtn.addEventListener("click", loginAccountBtnHandler);
 backdropEl.addEventListener("click", backdropHandler);
+
+window.addEventListener("keydown", function (event) {
+  // If <ESC> clicked
+  if (event.key === "Escape") {
+    if (loginFormEl.classList.contains("visible")) {
+      closeLoginFormHandler();
+      return;
+    } else if (registerFormEl.classList.contains("visible")) {
+      closeRegisterFormHandler();
+      return;
+    }
+  }
+});
