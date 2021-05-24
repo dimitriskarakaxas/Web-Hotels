@@ -29,6 +29,11 @@ body {
   position: relative;
 }
 
+.logo a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .logo::before {
   content: "";
   position: absolute;
