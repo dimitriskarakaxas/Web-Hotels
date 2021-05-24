@@ -1,3 +1,5 @@
+<?php require "src/includes.php" ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,7 +22,7 @@
   </head>
   <body>
     <header class="top-navigation">
-      <p class="logo">Web Hotels</p>
+      <p class="logo"><a href="http://localhost/Project/">Web Hotels</a></p>
       <div class="app-actions">
         <button id="login-btn">Sign In</button>
         <button id="register-btn">Register</button>
@@ -33,8 +35,8 @@
       <h2 class="form-type">Sign In</h2>
       <p class="form-text">And lets get your Hotel online!</p>
       <?php
-        if (!empty($_GET["error"]) && $_GET["type"] === "Login") {
-          echo "<p class='error-msg'>". $_GET["error"] ."</p>";
+        if (!empty($_GET["error"]) && $_GET["form"] === LOGIN_FORM) {
+          echo "<p class='error-msg'>" . $_GET["error"] . "</p>";
         }
       ?>
       <form action="src/login.php" method="POST">
@@ -59,7 +61,7 @@
       <h2 class="form-type">Register</h2>
       <p class="form-text">And lets get your Hotel online!</p>
       <?php
-        if (!empty($_GET["error"]) && $_GET["type"] === "Register") {
+        if (!empty($_GET["error"]) && $_GET["form"] === REGISTER_FORM) {
           echo "<p class='error-msg'>". $_GET["error"] ."</p>";
         }
       ?>
@@ -90,7 +92,7 @@
     <script src="script.js"></script>
     <?php      
       if (!empty($_GET["error"])) {
-        echo "<script type='text/javascript' defer>open{$_GET["type"]}FormHandler();</script>";
+        echo "<script type='text/javascript' defer>open{$_GET["form"]}FormHandler();</script>";
       }
     ?>
   </body>

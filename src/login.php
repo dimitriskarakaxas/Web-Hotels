@@ -1,13 +1,13 @@
 <?php
 
 // require "db_connection.php";
+require "includes.php";
 
 $username = trim($_POST["username"]);
 $password = $_POST["password"];
 
 if (empty($password) || empty($username)) {
     $loginErrorMsg = "";
-    $formType = "Login";
     if (!empty($password)) {
        $loginErrorMsg = "Please enter your username";
     } else if (!empty($username)) {
@@ -15,7 +15,7 @@ if (empty($password) || empty($username)) {
     } else {
         $loginErrorMsg = "Please fill the form";
     }
-    header("Location: ../index.php?error=${loginErrorMsg}&type=${formType}");
+    header("Location: ../index.php?error=${loginErrorMsg}&form=".LOGIN_FORM);
 }
 
 ?>
