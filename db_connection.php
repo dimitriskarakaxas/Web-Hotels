@@ -14,6 +14,5 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOEXCEPTION $e) {
     $errorMsg = $e->getMessage();
-    die("ERROR: Could not connect. " . $errorMsg);
+    die("ERROR: Can not connect with the database. " . $errorMsg);
 }
-
