@@ -18,7 +18,8 @@
       href="https://fonts.googleapis.com/css2?family=KoHo:wght@700&family=Lato&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
   <body>
     <header class="top-navigation">
@@ -75,6 +76,11 @@
         <label for="password">Password</label>
         <input type="password" name="password" />
 
+        <div class="recaptcha-container">
+          <?php 
+          echo "<div class='g-recaptcha' data-sitekey=".RECAPTCHA_KEY_CLIENT_SIDE."></div>"
+          ?>
+        </div>
         <input type="submit" value="Register" />
       </form>
       <div class="extra">
