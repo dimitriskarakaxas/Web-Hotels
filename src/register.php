@@ -84,7 +84,7 @@ if (!$responseKeys["success"]) {
 
 
 try {
-
+    // Unique Email Check
     $emailSQL = "SELECT email FROM users WHERE email=:email";
     $stmt = $pdo->prepare($emailSQL);
     $stmt->execute(
@@ -95,8 +95,10 @@ try {
         $registerErrorMsg = "This Email is already in use";
         sendFormError($registerErrorMsg, REGISTER_FORM);
     }
+    $stmt->closeCursor();
 
 
+    // Unique Username Check
     $usernameSQL = "SELECT username FROM users WHERE username=:username";
     $stmt = $pdo->prepare($usernameSQL);
     $stmt->execute(
@@ -107,9 +109,27 @@ try {
         $registerErrorMsg = "This Username is already in use";
         sendFormError($registerErrorMsg, REGISTER_FORM);
     }
-    
+    $stmt->closeCursor();
 
     
+    // ***** User Registeration *****
+    // Encrypt password with SHA512 hashing algorithm
+    $salt = "$6$".rand(10000000,99999999)."$"."giveme10outof10!";
+    $encryptedPassword = crypt($password, $salt);
+
+    // Generate Activation Code
+    $activationCode = generateActivationCode();
+
+    // Create User
+    $userRecordSQL = "INSERT INTO users (username, email, password, activation_code, status) VALUES (:username, :email, :password, :activation_code, :status)";
+    $stmt = $pdo->prepare($userRecordSQL);
+    $stmt->execute([
+        ":username" => $username,
+        ":email" => $email,
+        ":password" => $encryptedPassword,
+        ":activation_code" => $activationCode,
+        ":status" => 0
+    ]);
 } catch (PDOException $e) {
     $errorMsg = $e->getMessage();
     die("ERROR: Something went wrong. " . $errorMsg);
