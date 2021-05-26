@@ -15,7 +15,7 @@ body {
 .top-navigation {
   display: flex;
   justify-content: space-between;
-  padding: 0 2em;
+  padding: 0 2vw;
   align-items: center;
   height: 70px;
   border-bottom: 2px solid rgb(69, 214, 50);
