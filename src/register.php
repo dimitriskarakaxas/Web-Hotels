@@ -1,7 +1,8 @@
 <?php
 require "../db_connection.php";
-require "includes.php";
+require "constants.php";
 require "functions.php";
+require "sendMail.php";
 
 
 // User Data
@@ -123,13 +124,20 @@ try {
     // Create User
     $userRecordSQL = "INSERT INTO users (username, email, password, activation_code, status) VALUES (:username, :email, :password, :activation_code, :status)";
     $stmt = $pdo->prepare($userRecordSQL);
-    $stmt->execute([
+    $userRecordCreation = $stmt->execute([
         ":username" => $username,
         ":email" => $email,
         ":password" => $encryptedPassword,
         ":activation_code" => $activationCode,
         ":status" => 0
     ]);
+    $stmt->closeCursor();
+
+    if ($userRecordCreation) {
+        sendActivationCode($email, $username, $activationCode);
+    }
+
+    $pdo = null;    
 } catch (PDOException $e) {
     $errorMsg = $e->getMessage();
     die("ERROR: Something went wrong. " . $errorMsg);

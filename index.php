@@ -1,4 +1,4 @@
-<?php require "src/includes.php" ?>
+<?php require "src/constants.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">
