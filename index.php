@@ -36,8 +36,10 @@
       <h2 class="form-type">Sign In</h2>
       <p class="form-text">And lets get your Hotel online!</p>
       <?php
-        if (!empty($_GET["error"]) && $_GET["form"] === LOGIN_FORM) {
+        if (isset($_GET["error"]) && $_GET["form"] === LOGIN_FORM) {
           echo "<p class='error-msg'>" . $_GET["error"] . "</p>";
+        } else if (isset($_GET["success"]) && $_GET["form"] === LOGIN_FORM) {
+          echo "<p class='success-msg'>" . $_GET["success"] . "</p>";
         }
       ?>
       <form action="src/login.php" method="POST">
@@ -62,7 +64,7 @@
       <h2 class="form-type">Register</h2>
       <p class="form-text">And lets get your Hotel online!</p>
       <?php
-        if (!empty($_GET["error"]) && $_GET["form"] === REGISTER_FORM) {
+        if (isset($_GET["error"]) && $_GET["form"] === REGISTER_FORM) {
           echo "<p class='error-msg'>". $_GET["error"] ."</p>";
         }
       ?>
@@ -98,7 +100,7 @@
       echo "<p class='form-text'>We already send a code to <strong class='activation-email'>". $_GET["email"] ."</strong>, please check your inbox and insert the code in form below to verify your email</p>";
       ?>
       <?php
-        if (!empty($_GET["error"]) && $_GET["form"] === LOGIN_FORM) {
+        if (!empty($_GET["error"]) && $_GET["form"] === ACCOUNT_ACTIVATION_FORM) {
           echo "<p class='error-msg'>" . $_GET["error"] . "</p>";
         }
       ?>
@@ -107,7 +109,7 @@
         <?php
           echo "<input type='email' name='email' value='". $_GET["email"] ."'/>";
         ?>
-        <input type="number" name="n1" required /><input type="number" name="n2" required /><input type="number" name="n3" required /><input type="number" name="n4" required /><input type="number" name="n5" required />
+        <input type="number" name="n1" /><input type="number" name="n2" /><input type="number" name="n3" /><input type="number" name="n4" /><input type="number" name="n5" />
         <button type="submit" name="submit">
           Continue
           <i class="fas fa-arrow-right"></i>
@@ -121,7 +123,7 @@
 
     <script src="script.js"></script>
     <?php      
-      if (!empty($_GET["error"]) || !empty($_GET["email"])) {
+      if (isset($_GET["form"])) {
         echo "<script type='text/javascript' defer>open{$_GET["form"]}FormHandler();</script>";
       }
     ?>

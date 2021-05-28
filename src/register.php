@@ -147,7 +147,7 @@ try {
 
 } catch (PDOException $e) {
     $errorMsg = $e->getMessage();
-    die("ERROR: Something went wrong. " . $errorMsg);
+    exit($errorMsg);
 }
 
 

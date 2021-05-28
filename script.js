@@ -46,6 +46,9 @@ function toggleBackdrop() {
 }
 
 function backdropHandler() {
+  if (activationForm.classList.contains("visible")) {
+    return;
+  }
   closeLoginFormHandler();
   closeRegisterFormHandler();
   toggleBackdrop();
