@@ -7,8 +7,10 @@ const closeRegisterFormBtn = document.getElementById("close-register-form");
 const createAccountBtn = document.querySelector(".create-account");
 const loginAccountBtn = document.querySelector(".login");
 const backdropEl = document.getElementById("backdrop");
-console.log(createAccountBtn);
+const activationForm = document.getElementById("activation-form");
+const activationFormInputs = activationForm.querySelectorAll("input");
 
+// Open - Close modals
 function openLoginFormHandler() {
   loginFormEl.classList.add("visible");
   toggleBackdrop();
@@ -49,6 +51,11 @@ function backdropHandler() {
   toggleBackdrop();
 }
 
+function openActivateAccountFormHandler() {
+  activationForm.classList.add("visible");
+  toggleBackdrop();
+}
+
 openLoginFormBtn.addEventListener("click", openLoginFormHandler);
 closeLoginFormBtn.addEventListener("click", closeLoginFormHandler);
 openRegisterFormBtn.addEventListener("click", openRegisterFormHandler);
@@ -69,3 +76,22 @@ window.addEventListener("keydown", function (event) {
     }
   }
 });
+
+// Activation code inputs
+for (const input of activationFormInputs) {
+  input.addEventListener("keydown", function (event) {
+    event.preventDefault();
+    const currentInput = event.target;
+    if (isFinite(event.key) && event.key !== " ") {
+      currentInput.value = event.key;
+      currentInput.blur();
+      currentInput.nextElementSibling.focus();
+    } else if (event.key === "Backspace") {
+      currentInput.value = "";
+      currentInput.blur();
+      if (currentInput.previousElementSibling) {
+        currentInput.previousElementSibling.focus();
+      }
+    }
+  });
+}

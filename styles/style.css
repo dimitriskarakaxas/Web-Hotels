@@ -222,6 +222,78 @@ body {
   text-align: center;
 }
 
+#activation-form {
+  max-width: 550px;
+}
+
+#activation-form h2 {
+  margin-bottom: 1em;
+}
+
+#activation-form .form-text {
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
+#activation-form .activation-email {
+  color: #000;
+}
+
+/* Remove Arrows from input */
+/* Chrome, Safari, Edge, Opera */
+#activation-form input::-webkit-outer-spin-button,
+#activation-form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+#activation-form input[type="number"] {
+  width: 20%;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: 3px solid #000;
+  padding: 0.4 0.5em;
+  text-align: center;
+}
+
+#activation-form input[type="number"]:focus {
+  border-bottom-color: rgb(128, 0, 128);
+  border-top-color: rgb(128, 0, 128);
+}
+
+#activation-form input[type="number"] + input[type="number"] {
+  border-left: none;
+}
+
+#activation-form input[type="email"] {
+  display: none;
+}
+
+#activation-form button {
+  font-family: inherit;
+  font-size: 1.2rem;
+  color: #fff;
+  background: rgb(40, 163, 194);
+  width: 100%;
+  padding: 1.2em 0;
+  text-transform: uppercase;
+  border: none;
+  margin-top: 1.3em;
+  cursor: pointer;
+}
+
+#activation-form button:hover {
+  background: rgb(18, 106, 128);
+}
+
+#activation-form button i {
+  margin-left: 0.9em;
+}
+
 @media all and (max-width: 45.5em) {
   .actions-form {
     width: 90%;

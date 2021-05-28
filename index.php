@@ -92,12 +92,36 @@
       </button>
     </div>
 
+    <div id="activation-form" class="actions-form">
+      <h2 class="form-type">Just one more step, let's verify your email</h2>
+      <?php
+      echo "<p class='form-text'>We already send a code to <strong class='activation-email'>". $_GET["email"] ."</strong>, please check your inbox and insert the code in form below to verify your email</p>";
+      ?>
+      <?php
+        if (!empty($_GET["error"]) && $_GET["form"] === LOGIN_FORM) {
+          echo "<p class='error-msg'>" . $_GET["error"] . "</p>";
+        }
+      ?>
+      <form action="src/activate.php" method="POST">
+      <div class="inputs-container">
+        <?php
+          echo "<input type='email' name='email' value='". $_GET["email"] ."'/>";
+        ?>
+        <input type="number" name="n1" required /><input type="number" name="n2" required /><input type="number" name="n3" required /><input type="number" name="n4" required /><input type="number" name="n5" required />
+        <button type="submit" name="submit">
+          Continue
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+      </form>
+    </div>
+
     <div id="backdrop" class="backdrop"></div>
 
 
     <script src="script.js"></script>
     <?php      
-      if (!empty($_GET["error"])) {
+      if (!empty($_GET["error"]) || !empty($_GET["email"])) {
         echo "<script type='text/javascript' defer>open{$_GET["form"]}FormHandler();</script>";
       }
     ?>

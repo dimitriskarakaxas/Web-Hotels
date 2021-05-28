@@ -29,12 +29,20 @@ function sendActivationCode($email, $username, $activationCode) {
         // Content
         $mail->isHTML(true);
         $mail->Subject = "WebHotels Activation Code";
-        $mail->Body = "<p style='font-size: 40px; text-align: center; margin: 0 0 20px;'>Web Hotels</p><p style='color: purple; font-size: 20px;'>Congratulations for creating an account to our website!</p><p style='margin: 0; font-size: 20px;'>In order to continue and take your hotel online please confirm your registration by activating your account with the code below:</p><p style='font-size: 35px; margin: 10px 0 0 0; letter-spacing: 10px; text-align: center; border: 2px solid purple; display: inline-block;'>${activationCode}</p>";
+        $mail->Body = "<p style='font-size: 40px; text-align: center; margin: 0 0 20px;'>Web Hotels</p><p style='color: purple; font-size: 20px;'>Congratulations for creating an account to our website!</p><p style='margin: 0; font-size: 20px;'>In order to continue and take your hotel online please verify your registration by activating your account with the code below:</p><p style='font-size: 35px; margin: 10px 0 0 0; letter-spacing: 10px; text-align: center; border: 2px solid purple; display: inline-block;'>${activationCode}</p>";
     
-        $mail->send();
+        if ($mail->send()) {
+            // Email sent successfully
+            return true;
+        } else {
+            // Something went wrong
+            return false;
+        }
         
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: " . $mail->ErrorInfo;
+        // Something went wrong
+        return false;
+        
     }
 }
 ?>

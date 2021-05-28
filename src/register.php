@@ -80,7 +80,7 @@ $responseKeys = json_decode($response, true);
 
 if (!$responseKeys["success"]) {
     // Spammer trying to create account
-    exit();
+    exit;
 }
 
 
@@ -132,12 +132,19 @@ try {
         ":status" => 0
     ]);
     $stmt->closeCursor();
+    $pdo = null;    
 
     if ($userRecordCreation) {
-        sendActivationCode($email, $username, $activationCode);
+        $emailArrived = sendActivationCode($email, $username, $activationCode);
+        if ($emailArrived) {
+            header("Location: ../index.php?email=${email}&form=".ACCOUNT_ACTIVATION_FORM);
+            exit;
+        } else {
+            sendFormError("Something went wrong!", REGISTER_FORM);
+        }
+
     }
 
-    $pdo = null;    
 } catch (PDOException $e) {
     $errorMsg = $e->getMessage();
     die("ERROR: Something went wrong. " . $errorMsg);
