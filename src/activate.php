@@ -34,11 +34,11 @@
             exit;
         }
 
-        if ($record["status"] === 1) {
+        if ($record["status"] === ACTIVATED_ACCOUNT) {
             exit;
         }
 
-        $updateStatusSQL = "UPDATE users SET status = 1 WHERE email=:email";
+        $updateStatusSQL = "UPDATE users SET status = " . ACTIVATED_ACCOUNT . " WHERE email=:email";
         $stmt = $pdo->prepare($updateStatusSQL);
         $stmt->execute([
             "email" => $email
@@ -53,6 +53,4 @@
         $errorMsg = $e->getMessage();
         exit($errorMsg);
     }
-    
-
 ?>
