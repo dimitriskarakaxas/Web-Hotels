@@ -129,7 +129,7 @@ try {
         ":email" => $email,
         ":password" => $encryptedPassword,
         ":activation_code" => $activationCode,
-        ":status" => INACTIVATED_ACCOUNT
+        ":status" => INACTIVE_ACCOUNT
     ]);
     $stmt->closeCursor();
     $pdo = null;    

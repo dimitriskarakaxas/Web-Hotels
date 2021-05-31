@@ -21,7 +21,7 @@ if (empty($password) || empty($username)) {
 }
 
 try {
-    $checkUserSQL = "SELECT userid, username, password, status FROM users WHERE username=:username";
+    $checkUserSQL = "SELECT userid, username, email, password, status FROM users WHERE username=:username";
     $stmt = $pdo->prepare($checkUserSQL);
     $stmt->execute([
         "username" => $username
@@ -37,9 +37,10 @@ try {
     $stmt->closecursor();
 
     // Check if account is innactive
-    if ($userRecord["status"] === INACTIVATED_ACCOUNT) {
+    if ($userRecord["status"] === INACTIVE_ACCOUNT) {
         $loginErrorMsg = "Your acount is not active!";
-        sendFormError($loginErrorMsg, ACCOUNT_ACTIVATION_FORM);
+        header("Location: ../index.php?email=". $userRecord["email"] ."&error=${loginErrorMsg}&form=".ACCOUNT_ACTIVATION_FORM);
+        exit;
     }
 
     // Check if password is not correct

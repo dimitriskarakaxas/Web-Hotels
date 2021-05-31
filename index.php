@@ -1,8 +1,13 @@
 <?php session_start(); ?>
+<?php require "src/is_logged_in.php"; ?>
 <?php require "components/header.php"; ?>
 <?php require "components/top-navigation.php"; ?>
 
-    
+    <?php 
+      if ($userIsLoggedIn) {
+        require "components/user-navigation.php";
+      }
+    ?>
 
     <main id="app">
     </main>
@@ -95,11 +100,21 @@
 
     <div id="backdrop" class="backdrop"></div>
 
-
-    <script src="script.js"></script>
+    <?php
+      if (!$userIsLoggedIn) {
+        echo "<script src='js/script.js'></script>";
+      }
+    ?>    
+    
+    <?php
+      if ($userIsLoggedIn) {
+        echo "<script src='js/userscript.js'></script>";
+      }
+    ?>
+    
     <?php      
       if (isset($_GET["form"])) {
-        echo "<script type='text/javascript' defer>open{$_GET["form"]}FormHandler();</script>";
+        echo "<script defer>open{$_GET["form"]}FormHandler();</script>";
       }
     ?>
   </body>
