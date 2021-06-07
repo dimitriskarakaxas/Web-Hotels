@@ -9,7 +9,8 @@ body {
   font-size: 1rem;
   font-family: "Lato", sans-serif;
   margin: 0;
-  /* overflow: hidden; */
+  background: #222;
+  overflow: hidden;
 }
 
 .top-navigation {
@@ -95,21 +96,23 @@ body {
 }
 
 .dropdown .user-greet-btn {
+  padding: 0.35em 1.1em;
   font-size: 1.1rem;
-  /* border: 2px solid rgb(27, 187, 48); */
-  padding-right: 1.3em;
+  border-radius: 4px;
+  padding-right: 2.2em;
   position: relative;
+  cursor: pointer;
 }
 
 .dropdown .user-greet-btn::after {
   content: "";
   position: absolute;
-  border-top: 7px solid black;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
+  border-top: 6px solid black;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
   top: 50%;
   transform: translateY(-50%);
-  right: 0;
+  right: 1.1em;
 }
 
 .user-greet-btn:hover,
@@ -120,6 +123,7 @@ body {
 .user-greet-btn span {
   color: rgb(128, 0, 128);
   font-weight: 700;
+  pointer-events: none;
 }
 
 .dropdown-content {
@@ -172,6 +176,7 @@ body {
   position: fixed;
   top: -30px;
   left: -100px;
+  z-index: 8;
 }
 
 .circle {
@@ -210,6 +215,70 @@ body {
   transform: translate(-25%, -75%);
 }
 
+nav.login-navigation-items {
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  z-index: 2;
+}
+
+nav.login-navigation-items ul {
+  list-style-type: none;
+  padding-left: 30px;
+}
+
+nav.login-navigation-items ul li {
+  text-transform: uppercase;
+  color: #fff;
+  margin: 40px 0;
+  transform: translate(-150%);
+  transition: transform 0.3s ease-in;
+  text-align: center;
+  cursor: pointer;
+}
+
+nav.login-navigation-items ul li a {
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+nav.login-navigation-items ul li:hover {
+  opacity: 0.75;
+}
+
+nav.login-navigation-items ul li i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+nav.login-navigation-items ul li + li {
+  margin-left: 30px;
+  transform: translate(-200%);
+}
+
+.login-navigation.show-nav + nav.login-navigation-items li {
+  transform: translateX(0%);
+  transition-delay: 0.15s;
+}
+
+#app {
+  background: rgb(8, 135, 219);
+  height: 200vh;
+  transform-origin: top left;
+  transition: all 0.3s linear;
+}
+
+#app.show-nav {
+  transform: rotate(-20deg);
+}
+
+@media (orientation: portrait) {
+  #app.show-nav {
+    transform: rotate(-10deg);
+  }
+}
+
 /* FORMS */
 .actions-form {
   width: 50%;
@@ -219,8 +288,11 @@ body {
   background: #fff;
   border: 2px solid rgb(194, 194, 194);
   z-index: 50;
-  position: relative;
   display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .close-form {

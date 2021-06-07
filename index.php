@@ -10,6 +10,7 @@
     ?>
 
     <main id="app">
+      
     </main>
 
     <div id="login-form" class="actions-form">

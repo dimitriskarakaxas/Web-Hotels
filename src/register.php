@@ -46,6 +46,8 @@ if (preg_match("/\W/", $username) || strlen($username) > 25) {
     sendFormError($registerErrorMsg, REGISTER_FORM);
 }
 
+
+
 // Password Check
 if (preg_match("/\W/", $password) || strlen($password) < 8) {
     $registerErrorMsg = "";
@@ -57,6 +59,8 @@ if (preg_match("/\W/", $password) || strlen($password) < 8) {
     sendFormError($registerErrorMsg, REGISTER_FORM);
 }
 
+
+
 // reCAPTCHA Check
 if (isset($_POST["g-recaptcha-response"])) {
     $captcha = $_POST["g-recaptcha-response"];
@@ -66,7 +70,6 @@ if (!$captcha) {
     $registerErrorMsg = "Please confirm that you are not a robot!";
     sendFormError($registerErrorMsg, REGISTER_FORM);
 }
-
 
 $secretKey = RECAPTCHA_KEY_SERVER_SIDE;
 $userIP = $_SERVER["REMOTE_ADDR"];
@@ -82,7 +85,6 @@ if (!$responseKeys["success"]) {
     // Spammer trying to create account
     exit;
 }
-
 
 try {
     // Unique Email Check
@@ -149,9 +151,3 @@ try {
     $errorMsg = $e->getMessage();
     exit($errorMsg);
 }
-
-
-
-
-
-

@@ -5,7 +5,7 @@
         <?php
           if ($userIsLoggedIn) {
             echo "<div class='dropdown'>
-                    <button class='user-greet-btn' id='greet-btn'>Welcome, " . $_SESSION["username"] . "</button>
+                    <p class='user-greet-btn' id='greet-btn'>Welcome, <span>" . $_SESSION["username"] . "</span></p>
                     <div id='user-dropdown' class='dropdown-content'>
                       <a href='/Project/src/logout.php'>Log Out</a>
                     </div>
